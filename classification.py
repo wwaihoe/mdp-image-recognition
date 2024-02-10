@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorflow import keras
 import os
 
-path = "D:/OneDrive - Nanyang Technological University/23S2/MDP"
+path = os.getcwd()
 os.chdir(path)
 
 classes = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", 
@@ -32,7 +32,6 @@ def classify(path):
   rgb_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2RGB)
   
   rgb_tensor = tf.convert_to_tensor(rgb_image, dtype=tf.float32)/255.0
-  print(rgb_tensor)
   img_batch = np.expand_dims(rgb_tensor, axis=0)
   logits = effnetv2_ft(img_batch)
   pred = int(tf.math.argmax(logits, axis=1)[0])
